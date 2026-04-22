@@ -63,7 +63,8 @@ const COLOR_ESTADO: Record<string, string> = {
             <input
               type="search"
               placeholder="Buscar proyecto o responsable…"
-              class="input-minimal pl-10 pr-4"
+              class="input-minimal"
+              style="padding-left: 2.75rem; padding-right: 1rem"
               [value]="searchQuery()"
               (input)="onSearch($event)"
               aria-label="Buscar por proyecto o responsable"
