@@ -13,6 +13,7 @@ function normalizeProjectName(name: string): string {
   return name.replace(/[​‌‍﻿]/g, '').trim();
 }
 
+
 @Injectable({ providedIn: 'root' })
 export class GeodataService {
   private readonly http = inject(HttpClient);
