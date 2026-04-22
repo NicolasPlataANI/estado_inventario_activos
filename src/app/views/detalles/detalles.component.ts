@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgxEchartsDirective } from 'ngx-echarts';
@@ -339,7 +340,12 @@ const COLOR_ESTADO: Record<string, string> = {
 export class DetallesComponent {
   private readonly svc    = inject(InventarioService);
   private readonly router = inject(Router);
+  private readonly titleSvc = inject(Title);
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  constructor() {
+    this.titleSvc.setTitle('Detalles de Activos — ANI');
+  }
 
   protected readonly proyectos = toSignal(this.svc.getInventario());
   protected readonly cargando  = computed(() => !this.proyectos());

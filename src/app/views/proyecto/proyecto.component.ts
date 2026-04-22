@@ -1,5 +1,6 @@
-import { Component, computed, inject, signal, PLATFORM_ID } from '@angular/core';
+import { Component, computed, inject, signal, PLATFORM_ID, effect, untracked } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
@@ -264,7 +265,17 @@ const CHIP_BG: Record<EstadoElemento, string> = {
 export class ProyectoComponent {
   private readonly svc   = inject(InventarioService);
   private readonly route = inject(ActivatedRoute);
+  private readonly titleSvc = inject(Title);
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  constructor() {
+    effect(() => {
+      const p = this.proyecto();
+      if (p) {
+        untracked(() => this.titleSvc.setTitle(`${p.nombre} — Detalles`));
+      }
+    });
+  }
 
   // ID de ruta como signal
   private readonly id = toSignal(

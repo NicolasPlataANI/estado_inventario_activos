@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 interface AvanceYear {
@@ -290,6 +291,12 @@ interface FlowStep {
   `,
 })
 export class HomeComponent {
+  private readonly titleSvc = inject(Title);
+
+  constructor() {
+    this.titleSvc.setTitle('Inventario de Activos — ANI');
+  }
+
   protected readonly flowSteps: FlowStep[] = [
     {
       numero: '01',

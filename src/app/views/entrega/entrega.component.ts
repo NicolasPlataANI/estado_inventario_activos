@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { MazoCardComponent, MazoSlide } from '../../shared/mazo-card/mazo-card.component';
 
 interface Escenario {
@@ -105,6 +106,12 @@ interface Escenario {
   `,
 })
 export class EntregaComponent {
+  private readonly titleSvc = inject(Title);
+
+  constructor() {
+    this.titleSvc.setTitle('Entrega de Información — ANI');
+  }
+
   protected readonly escenarios: Escenario[] = [
     {
       titulo: 'Entrega Dispersa y Sin Estandarización',

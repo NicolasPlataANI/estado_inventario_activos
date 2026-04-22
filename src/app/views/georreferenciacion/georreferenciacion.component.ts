@@ -1,5 +1,6 @@
 import { Component, computed, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgxEchartsDirective } from 'ngx-echarts';
@@ -189,7 +190,12 @@ const COLORES = {
 })
 export class GeorreferenciacionComponent {
   private readonly svc = inject(InventarioService);
+  private readonly titleSvc = inject(Title);
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  constructor() {
+    this.titleSvc.setTitle('Estado de Georreferenciación — ANI');
+  }
 
   protected readonly proyectos = toSignal(this.svc.getInventario());
 
