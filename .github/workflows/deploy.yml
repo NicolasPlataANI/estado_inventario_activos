@@ -17,6 +17,10 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Fuerza Node.js 24 en las GitHub Actions (suprime advertencias de deprecación)
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   # ──────────────────────────────────────────────────────────────
   # JOB 1: Build estático
@@ -32,7 +36,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -46,7 +50,7 @@ jobs:
       # GitHub Pages no tiene routing server-side.
       # Copiar index.html → 404.html hace que cualquier ruta profunda
       # (p.ej. /detalles/5) sea atendida por Angular Router en el cliente.
-      - name: Habilitar SPA routing (copiar index → 404)
+      - name: Habilitar SPA routing
         run: cp dist/inventarioApp/browser/index.html dist/inventarioApp/browser/404.html
 
       # Evitar que GitHub Pages procese los archivos con Jekyll
