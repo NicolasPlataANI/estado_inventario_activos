@@ -377,7 +377,9 @@ export class GeodataComponent {
   // ── Inicialización del mapa ──────────────────────────────────────
 
   private async initMap(): Promise<void> {
-    const L = await import('leaflet');
+    const leafletModule = await import('leaflet');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const L = (leafletModule as any).default ?? leafletModule;
     this.L = L;
 
     this.tileLayers['Oscuro']   = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',   { maxNativeZoom: 19, maxZoom: 22, attribution: '© CartoDB' });
