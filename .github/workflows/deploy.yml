@@ -1,0 +1,77 @@
+name: Build & Deploy — Inventario ANI → GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+# Permiso para publicar en GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evita deploys paralelos; el último push cancela el anterior
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # ──────────────────────────────────────────────────────────────
+  # JOB 1: Build estático
+  # ──────────────────────────────────────────────────────────────
+  build:
+    name: Build Angular (static)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build producción
+        run: npm run build -- --base-href=/estado_inventario_activos/
+        env:
+          NODE_OPTIONS: '--max-old-space-size=4096'
+
+      # GitHub Pages no tiene routing server-side.
+      # Copiar index.html → 404.html hace que cualquier ruta profunda
+      # (p.ej. /detalles/5) sea atendida por Angular Router en el cliente.
+      - name: Habilitar SPA routing (copiar index → 404)
+        run: cp dist/inventarioApp/browser/index.html dist/inventarioApp/browser/404.html
+
+      # Evitar que GitHub Pages procese los archivos con Jekyll
+      - name: Desactivar Jekyll
+        run: touch dist/inventarioApp/browser/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/inventarioApp/browser
+
+  # ──────────────────────────────────────────────────────────────
+  # JOB 2: Deploy a GitHub Pages (solo en push a main/master)
+  # ──────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

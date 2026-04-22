@@ -1,3 +1,130 @@
-/* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
+
+:root {
+  --color-primary: #a04100;
+  --color-primary-container: #fa6f18;
+  --color-surface: #fff8f4;
+  --color-surface-low: #fdf2e9;
+  --color-surface-container: #f5ebe0;
+  --color-surface-container-highest: #e8ddd2;
+  --color-secondary: #4e6073;
+  --color-on-surface: #1f1b16;
+  --color-on-primary: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Public Sans', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Tailwind utility aliases para los tokens del design system */
+@layer utilities {
+  .bg-surface { background-color: var(--color-surface); }
+  .bg-surface-low { background-color: var(--color-surface-low); }
+  .bg-surface-container { background-color: var(--color-surface-container); }
+  .bg-surface-highest { background-color: var(--color-surface-container-highest); }
+  .text-on-surface { color: var(--color-on-surface); }
+  .text-primary { color: var(--color-primary); }
+  .text-secondary { color: var(--color-secondary); }
+
+  /* Glassmorphism navbar */
+  .glass-nav {
+    background-color: rgba(255, 248, 244, 0.80);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Botón primario con gradiente */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+    color: var(--color-on-primary);
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: inline-block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 32px 48px rgba(31, 27, 22, 0.06);
+  }
+
+  /* Botón secundario ghost */
+  .btn-secondary {
+    border: 1px solid rgba(31, 27, 22, 0.20);
+    color: var(--color-primary);
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    background: transparent;
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Sombra ambiental difusa (no shadow estándar) */
+  .shadow-ambient {
+    box-shadow: 0 32px 48px rgba(31, 27, 22, 0.06);
+  }
+
+  /* Ghost border para accesibilidad en tablas */
+  .ghost-border {
+    outline: 1px solid rgba(31, 27, 22, 0.15);
+  }
+
+  /* Display grande editorial */
+  .display-lg {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-on-surface);
+  }
+
+  /* Input minimalista con underline en focus */
+  .input-minimal {
+    background-color: var(--color-surface-low);
+    border: none;
+    border-bottom: 2px solid rgba(31, 27, 22, 0.20);
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0.75rem 1rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    color: var(--color-on-surface);
+    transition: border-color 0.2s ease;
+    width: 100%;
+  }
+  .input-minimal:focus {
+    border-bottom-color: var(--color-primary);
+  }
+}
