@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+interface AvanceYear {
+  year: string;
+  titulo: string;
+  resumen: string;
+  hitos: string[];
+}
 
 interface FlowStep {
   numero: string;
@@ -43,7 +50,7 @@ interface FlowStep {
           class="font-sans text-white leading-none mb-8"
           style="font-family: 'Public Sans', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -0.02em; max-width: 16ch"
         >
-          Inventario de<br />Activos Viales
+          Capacitación sobre el<br />Estado de<br />Georreferenciación de<br />Proyectos de<br />Infraestructura - ANI
         </h1>
 
         <!-- Bajada -->
@@ -193,6 +200,93 @@ interface FlowStep {
 
       </div>
     </section>
+
+    <!-- ── AVANCES AÑO A AÑO ─────────────────────────────────────── -->
+    <section class="bg-[var(--color-surface-low)] py-24 px-6 lg:px-10">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Encabezado -->
+        <div class="mb-16">
+          <p class="text-[var(--color-primary)] font-inter text-sm font-medium tracking-widest uppercase mb-3">
+            Línea de tiempo
+          </p>
+          <h2
+            style="font-family: 'Public Sans', sans-serif; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-on-surface); letter-spacing: -0.02em; max-width: 22ch; line-height: 1.15"
+          >
+            Avances año a año
+          </h2>
+        </div>
+
+        <!-- Timeline con años clickeables -->
+        <div class="flex items-start gap-0 mb-12">
+          @for (avance of avances; track avance.year; let last = $last) {
+
+            <div class="flex flex-col items-center flex-1 relative">
+
+              <!-- Línea conectora (excluye último) -->
+              @if (!last) {
+                <div
+                  class="absolute top-7 left-[calc(50%+2rem)] right-0 h-0.5 z-0 transition-colors duration-500"
+                  [style.background]="avance.year < selectedYear() ? 'var(--color-primary)' : 'var(--color-surface-container)'"
+                ></div>
+              }
+
+              <!-- Círculo botón -->
+              <button
+                type="button"
+                (click)="selectedYear.set(avance.year)"
+                class="relative z-10 w-14 h-14 rounded-full font-inter text-xs font-bold border-2 transition-all duration-300 cursor-pointer"
+                [style.background]="selectedYear() === avance.year ? 'var(--color-primary)' : 'var(--color-surface)'"
+                [style.color]="selectedYear() === avance.year ? 'white' : 'var(--color-on-surface-variant)'"
+                [style.borderColor]="selectedYear() === avance.year ? 'var(--color-primary)' : 'var(--color-surface-container)'"
+                [style.boxShadow]="selectedYear() === avance.year ? '0 4px 20px rgba(160,65,0,0.28)' : 'none'"
+              >{{ avance.year }}</button>
+
+              <!-- Etiqueta del año -->
+              <p
+                class="mt-3 font-inter text-xs text-center px-2 leading-snug transition-colors duration-300"
+                style="max-width: 12ch"
+                [style.color]="selectedYear() === avance.year ? 'var(--color-primary)' : 'var(--color-secondary)'"
+                [style.fontWeight]="selectedYear() === avance.year ? '600' : '400'"
+              >{{ avance.titulo }}</p>
+
+            </div>
+
+          }
+        </div>
+
+        <!-- Tarjeta de contenido del año seleccionado -->
+        <div
+          class="rounded-2xl p-8 lg:p-10"
+          style="background: var(--color-surface)"
+        >
+          <p
+            class="font-inter text-base leading-relaxed mb-8"
+            style="color: var(--color-secondary); max-width: 72ch"
+          >{{ selectedAvance().resumen }}</p>
+
+          <ul class="flex flex-col gap-4">
+            @for (hito of selectedAvance().hitos; track hito) {
+              <li class="flex items-start gap-4">
+                <span
+                  class="shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
+                  style="background: var(--color-primary-container)"
+                >
+                  <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+                    <path d="M1 4.5L4.5 8L11 1" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span
+                  class="font-inter text-sm leading-relaxed"
+                  style="color: var(--color-on-surface)"
+                >{{ hito }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+
+      </div>
+    </section>
   `,
 })
 export class HomeComponent {
@@ -235,4 +329,44 @@ export class HomeComponent {
     { valor: '5', label: 'Responsables ANI' },
     { valor: '779', label: 'Elementos trazados' },
   ];
+
+  protected readonly avances: AvanceYear[] = [
+    {
+      year: '2024',
+      titulo: 'Inicio y contacto',
+      resumen: 'Se da inicio al proceso de captura de información geográfica para el inventario de activos del modo carretero, con comunicación directa a los grupos responsables de los 41 proyectos concesionados.',
+      hitos: [
+        'Solicitud a líderes y gerentes de proyecto a través de llamadas telefónicas y correos institucionales',
+        'Reuniones con cada grupo responsable de los 41 proyectos para acordar la entrega de información',
+        'Inicio del proceso de trazado de ejes de calzada para la totalidad de proyectos ANI',
+      ],
+    },
+    {
+      year: '2025',
+      titulo: 'Requerimiento formal',
+      resumen: 'Se formaliza la exigencia a los concesionarios mediante memorandos y se adopta el marco normativo que establece oficialmente los 17 elementos del inventario vial.',
+      hitos: [
+        'Memorandos formales a cada concesionario solicitando la georreferenciación de activos para cumplimiento normativo',
+        'Georreferenciación completada de 3 de los 17 elementos: Berma, Calzada y Separador',
+        'Expedición de la Resolución 20253040053135 del 23 de diciembre de 2025 por el Ministerio de Transporte',
+        'Adopción oficial de la metodología SINC y formalización del listado de 17 elementos del inventario',
+      ],
+    },
+    {
+      year: '2026',
+      titulo: 'Revisión y ampliación',
+      resumen: 'Se revisa y valida la información obtenida, se convocan mesas de trabajo con los concesionarios y se avanza en la georreferenciación de los 14 elementos restantes de la resolución ministerial.',
+      hitos: [
+        'Revisión y validación de la información georreferenciada recibida de los concesionarios',
+        'Convocatoria y realización de mesas de trabajo para coordinar entregas pendientes',
+        'Georreferenciación en curso de los 14 elementos restantes de los 17 establecidos en la resolución',
+      ],
+    },
+  ];
+
+  protected readonly selectedYear = signal<string>('2026');
+
+  protected readonly selectedAvance = computed(() =>
+    this.avances.find(a => a.year === this.selectedYear())!
+  );
 }

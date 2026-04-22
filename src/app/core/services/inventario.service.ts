@@ -94,18 +94,18 @@ export class InventarioService {
     return this.cache$;
   }
 
-  /** Calcula totales de estados sobre todos los proyectos */
+  /** Calcula totales de estados sobre todos los proyectos.
+   *  "No Aplica" se contabiliza por separado pero NO forma parte del total,
+   *  por lo que los porcentajes siempre se calculan sobre los tres estados activos. */
   calcularResumen(proyectos: Proyecto[]): ResumenEstados {
     let entregado = 0;
     let parcialmenteEntregado = 0;
     let pendiente = 0;
     let noAplica = 0;
-    let total = 0;
 
     for (const p of proyectos) {
       for (const el of p.elementos) {
         if (el.estado === null) continue;
-        total++;
         if (el.estado === 'Entregado') entregado++;
         else if (el.estado === 'Parcialmente Entregado') parcialmenteEntregado++;
         else if (el.estado === 'Pendiente') pendiente++;
@@ -113,6 +113,8 @@ export class InventarioService {
       }
     }
 
+    // total excluye "No Aplica" para que los porcentajes sean sobre estados activos
+    const total = entregado + parcialmenteEntregado + pendiente;
     return { entregado, parcialmenteEntregado, pendiente, noAplica, total };
   }
 

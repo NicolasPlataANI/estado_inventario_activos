@@ -19,7 +19,7 @@ interface NavLink {
           <img
             src="logoani.svg"
             alt="ANI — Agencia Nacional de Infraestructura"
-            class="h-8 w-auto"
+            class="h-12 w-auto"
           />
         </a>
 

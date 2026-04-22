@@ -283,9 +283,9 @@ const COLOR_ESTADO: Record<string, string> = {
           style="font-family: 'Public Sans', sans-serif; font-size: 1.125rem; font-weight: 700; color: var(--color-on-surface); letter-spacing: -0.01em"
         >Resumen global de activos</h2>
 
-        <!-- Leyenda de estados -->
+        <!-- Leyenda de estados (solo estados activos, sin "No Aplica") -->
         <div class="flex flex-wrap gap-6 mb-6">
-          @for (item of leyenda; track item.label) {
+          @for (item of chartLeyenda; track item.label) {
             <div class="flex items-center gap-2">
               <span class="w-3 h-3 rounded-full shrink-0" [style.background]="item.color"></span>
               <span class="text-sm" style="color: var(--color-on-surface); font-family: 'Inter', sans-serif">
@@ -450,12 +450,19 @@ export class DetallesComponent {
     this.router.navigate(['/detalles', id]);
   }
 
-  // ── Leyenda ─────────────────────────────────────────────────────
+  // ── Leyenda para gráficas (excluye "No Aplica") ─────────────────
+  protected readonly chartLeyenda = [
+    { label: 'Entregado',       key: 'entregado'             as const, color: '#16a34a' },
+    { label: 'Parc. Entregado', key: 'parcialmenteEntregado' as const, color: '#d97706' },
+    { label: 'Pendiente',       key: 'pendiente'             as const, color: '#dc2626' },
+  ];
+
+  // ── Leyenda flotante para la tabla (incluye "No Aplica") ─────────
   protected readonly leyenda = [
-    { label: 'Entregado',             key: 'entregado'             as const, color: '#16a34a' },
-    { label: 'Parc. Entregado',       key: 'parcialmenteEntregado' as const, color: '#d97706' },
-    { label: 'Pendiente',             key: 'pendiente'             as const, color: '#dc2626' },
-    { label: 'No Aplica',             key: 'noAplica'              as const, color: '#9ca3af' },
+    { label: 'Entregado',       color: '#16a34a' },
+    { label: 'Parc. Entregado', color: '#d97706' },
+    { label: 'Pendiente',       color: '#dc2626' },
+    { label: 'No Aplica',       color: '#9ca3af' },
   ];
 
   // ── Opciones ECharts barra apilada ─────────────────────────────
@@ -494,7 +501,6 @@ export class DetallesComponent {
         mkSerie('Entregado',       r.entregado,             '#16a34a'),
         mkSerie('Parc. Entregado', r.parcialmenteEntregado, '#d97706'),
         mkSerie('Pendiente',       r.pendiente,             '#dc2626'),
-        mkSerie('No Aplica',       r.noAplica,              '#9ca3af'),
       ],
     };
   });

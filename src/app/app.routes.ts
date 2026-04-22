@@ -29,6 +29,11 @@ export const routes: Routes = [
       import('./views/proyecto/proyecto.component').then((m) => m.ProyectoComponent),
   },
   {
+    path: 'geodata/:id',
+    loadComponent: () =>
+      import('./views/geodata/geodata.component').then((m) => m.GeodataComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

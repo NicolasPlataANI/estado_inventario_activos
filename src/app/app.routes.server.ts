@@ -8,5 +8,6 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'georreferenciacion', renderMode: RenderMode.Client },
   { path: 'detalles',           renderMode: RenderMode.Client },
   { path: 'detalles/:id',       renderMode: RenderMode.Client },
+  { path: 'geodata/:id',        renderMode: RenderMode.Client },
   { path: '**',                 renderMode: RenderMode.Client },
 ];

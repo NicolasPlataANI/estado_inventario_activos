@@ -234,6 +234,14 @@ const CHIP_BG: Record<EstadoElemento, string> = {
               </div>
             </div>
 
+            <!-- CTA Dashboard Geodata -->
+            <a
+              [routerLink]="['/geodata', p.id]"
+              class="btn-primary text-center text-sm"
+            >
+              Dashboard Geodata →
+            </a>
+
             <!-- Volver -->
             <a
               routerLink="/detalles"
@@ -313,7 +321,6 @@ export class ProyectoComponent {
       { label: 'Entregado',       valor: r.entregado,             color: '#16a34a' },
       { label: 'Parc. Entregado', valor: r.parcialmenteEntregado, color: '#d97706' },
       { label: 'Pendiente',       valor: r.pendiente,             color: '#dc2626' },
-      { label: 'No Aplica',       valor: r.noAplica,              color: '#9ca3af' },
     ].filter((i) => i.valor > 0);
   });
 
@@ -324,7 +331,6 @@ export class ProyectoComponent {
       { value: r.entregado,             name: 'Entregado',       itemStyle: { color: '#16a34a' } },
       { value: r.parcialmenteEntregado, name: 'Parc. Entregado', itemStyle: { color: '#d97706' } },
       { value: r.pendiente,             name: 'Pendiente',       itemStyle: { color: '#dc2626' } },
-      { value: r.noAplica,              name: 'No Aplica',       itemStyle: { color: '#9ca3af' } },
     ].filter((d) => d.value > 0);
 
     return {

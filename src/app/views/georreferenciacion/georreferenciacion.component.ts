@@ -125,17 +125,6 @@ const COLORES = {
                   </span>
                 </div>
 
-                <!-- No Aplica — gris -->
-                <div class="rounded-xl p-5" style="background: rgba(156,163,175,0.12)">
-                  <span
-                    class="block font-bold leading-none mb-1"
-                    style="font-family: 'Public Sans', sans-serif; font-size: 2rem; color: #9ca3af; letter-spacing: -0.03em"
-                  >{{ resumen().noAplica }}</span>
-                  <span class="text-xs font-semibold" style="color: #9ca3af">No Aplica</span>
-                  <span class="block text-xs mt-0.5" style="color: var(--color-secondary)">
-                    {{ pct(resumen().noAplica) }}% del total
-                  </span>
-                </div>
               </div>
             }
           </div>
@@ -211,10 +200,9 @@ export class GeorreferenciacionComponent {
   );
 
   protected readonly leyenda = computed(() => [
-    { label: `Entregado (${this.pct(this.resumen().entregado)}%)`,             color: COLORES.entregado },
+    { label: `Entregado (${this.pct(this.resumen().entregado)}%)`,                  color: COLORES.entregado },
     { label: `Parc. Entregado (${this.pct(this.resumen().parcialmenteEntregado)}%)`, color: COLORES.parcial },
-    { label: `Pendiente (${this.pct(this.resumen().pendiente)}%)`,             color: COLORES.pendiente },
-    { label: `No Aplica (${this.pct(this.resumen().noAplica)}%)`,              color: COLORES.noAplica },
+    { label: `Pendiente (${this.pct(this.resumen().pendiente)}%)`,                  color: COLORES.pendiente },
   ]);
 
   protected readonly chartOptions = computed<EChartsOption>(() => {
@@ -242,10 +230,9 @@ export class GeorreferenciacionComponent {
             label: { fontSize: 13 },
           },
           data: [
-            { value: r.entregado,             name: 'Entregado',             itemStyle: { color: COLORES.entregado } },
-            { value: r.parcialmenteEntregado, name: 'Parc. Entregado',       itemStyle: { color: COLORES.parcial } },
-            { value: r.pendiente,             name: 'Pendiente',             itemStyle: { color: COLORES.pendiente } },
-            { value: r.noAplica,              name: 'No Aplica',             itemStyle: { color: COLORES.noAplica } },
+            { value: r.entregado,             name: 'Entregado',       itemStyle: { color: COLORES.entregado } },
+            { value: r.parcialmenteEntregado, name: 'Parc. Entregado', itemStyle: { color: COLORES.parcial } },
+            { value: r.pendiente,             name: 'Pendiente',       itemStyle: { color: COLORES.pendiente } },
           ],
         },
       ],
