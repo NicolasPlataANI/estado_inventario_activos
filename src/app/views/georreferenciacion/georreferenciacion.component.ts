@@ -57,13 +57,34 @@ const COLORES = {
                 concesionada, en cumplimiento de los contratos de concesión de cuarta generación (4G)
                 y de la política de gestión de activos de infraestructura vial del país.
               </p>
-              <p>
-                Cada concesionario debe entregar la información geoespacial de sus activos
-                —calzadas, bermas, separadores, puentes, túneles, sistemas de drenaje,
-                señalización y demás elementos— en formatos estandarizados (AutoCAD DWG
-                estructurado o Shapefiles SIG), con nomenclatura de capas claramente definida
-                y geometría verificable.
-              </p>
+
+              <!-- Resolución destacada -->
+              <div class="rounded-xl p-5" style="background: rgba(160,65,0,0.06); border-left: 3px solid var(--color-primary)">
+                <p class="font-inter text-[11px] font-semibold uppercase tracking-widest mb-2" style="color: var(--color-primary)">
+                  Resolución vigente
+                </p>
+                <p class="text-sm leading-relaxed" style="color: var(--color-on-surface)">
+                  <strong>Resolución 20253040053135</strong> del 23 de diciembre de 2025 —
+                  <em>"Por la cual se adopta la metodología general para reportar la información que conforma
+                  el Sistema Integral Nacional de Información de Carreteras (SINC) y se dictan otras disposiciones."</em>
+                </p>
+              </div>
+
+              <!-- 17 elementos SINC -->
+              <div>
+                <p class="text-sm font-semibold mb-3" style="color: var(--color-on-surface)">
+                  Elementos de reporte definidos por la resolución (17):
+                </p>
+                <ul class="grid grid-cols-2 gap-x-6 gap-y-1.5">
+                  @for (el of elementosSINC; track el) {
+                    <li class="flex items-center gap-2 text-sm" style="color: var(--color-on-surface)">
+                      <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background: var(--color-primary)"></span>
+                      {{ el }}
+                    </li>
+                  }
+                </ul>
+              </div>
+
               <p>
                 El incumplimiento o la entrega parcial de esta información genera retrasos en
                 los procesos de revisión técnica, impide la toma de decisiones basada en datos
@@ -192,6 +213,13 @@ export class GeorreferenciacionComponent {
   private readonly svc = inject(InventarioService);
   private readonly titleSvc = inject(Title);
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  protected readonly elementosSINC = [
+    'Calzada', 'Berma', 'Separador', 'Cunetas', 'Drenajes',
+    'Defensas Viales', 'Peajes', 'Estación de Pesaje', 'CCO', 'ITS',
+    'Predios', 'Túneles', 'Luminarias', 'Señales', 'Muros',
+    'Zona de Servicio', 'Ciclorruta',
+  ] as const;
 
   constructor() {
     this.titleSvc.setTitle('Estado de Georreferenciación — ANI');
