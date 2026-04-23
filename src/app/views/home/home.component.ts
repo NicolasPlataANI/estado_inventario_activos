@@ -42,21 +42,21 @@ interface FlowStep {
       <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pb-20 pt-32">
 
         <!-- Eyebrow -->
-        <p class="text-white/70 font-inter text-sm font-medium tracking-widest uppercase mb-6">
+        <p class="text-white/70 font-inter text-base font-medium tracking-widest uppercase mb-6">
           Agencia Nacional de Infraestructura
         </p>
 
         <!-- Título editorial -->
         <h1
           class="font-sans text-white leading-none mb-8"
-          style="font-family: 'Public Sans', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -0.02em; max-width: 16ch"
+          style="font-family: 'Public Sans', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; letter-spacing: -0.02em; max-width: 16ch"
         >
           Capacitación sobre el<br />Estado de<br />Georreferenciación de<br />Proyectos de<br />Infraestructura - ANI
         </h1>
 
         <!-- Bajada -->
         <p
-          class="text-white/80 font-inter text-lg leading-relaxed mb-12"
+          class="text-white/80 font-inter text-xl leading-relaxed mb-12"
           style="max-width: 52ch"
         >
           Plataforma de seguimiento al estado de georreferenciación
@@ -77,7 +77,7 @@ interface FlowStep {
 
       <!-- Indicador de scroll -->
       <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/50">
-        <span class="font-inter text-xs tracking-widest uppercase">Flujo de información</span>
+        <span class="font-inter text-sm tracking-widest uppercase">Flujo de información</span>
         <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
           <rect x="6.5" y="0.5" width="3" height="3" rx="1.5" fill="currentColor" opacity="0.4"/>
           <rect x="6.5" y="6" width="3" height="3" rx="1.5" fill="currentColor" opacity="0.6"/>
@@ -94,11 +94,11 @@ interface FlowStep {
 
         <!-- Encabezado de sección -->
         <div class="mb-16">
-          <p class="text-[var(--color-primary)] font-inter text-sm font-medium tracking-widest uppercase mb-3">
+          <p class="text-[var(--color-primary)] font-inter text-base font-medium tracking-widest uppercase mb-3">
             Proceso interno
           </p>
           <h2
-            style="font-family: 'Public Sans', sans-serif; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-on-surface); letter-spacing: -0.02em; max-width: 22ch; line-height: 1.15"
+            style="font-family: 'Public Sans', sans-serif; font-size: clamp(2.25rem, 3.5vw, 3rem); font-weight: 700; color: var(--color-on-surface); letter-spacing: -0.02em; max-width: 22ch; line-height: 1.15"
           >
             Flujo de información de la ANI
           </h2>
@@ -135,7 +135,7 @@ interface FlowStep {
                     [attr.aria-label]="step.titulo"
                   >{{ step.icono }}</span>
                   <span
-                    class="font-inter text-xs font-semibold"
+                    class="font-inter text-sm font-semibold"
                     style="color: var(--color-primary)"
                   >{{ step.numero }}</span>
                 </div>
@@ -143,11 +143,11 @@ interface FlowStep {
                 <!-- Texto -->
                 <div class="lg:text-center lg:mt-5 lg:px-2">
                   <p
-                    class="font-sans font-semibold text-sm leading-snug mb-1"
+                    class="font-sans font-semibold text-base leading-snug mb-1"
                     style="font-family: 'Public Sans', sans-serif; color: var(--color-on-surface)"
                   >{{ step.titulo }}</p>
                   <p
-                    class="font-inter text-xs leading-relaxed"
+                    class="font-inter text-sm leading-relaxed"
                     style="color: var(--color-secondary)"
                   >{{ step.descripcion }}</p>
                 </div>
@@ -169,7 +169,7 @@ interface FlowStep {
 
         <!-- Nota al pie del diagrama -->
         <p
-          class="mt-16 font-inter text-xs leading-relaxed"
+          class="mt-16 font-inter text-sm leading-relaxed"
           style="color: var(--color-secondary); max-width: 72ch"
         >
           El tiempo estimado para el ciclo completo varía según el escenario de entrega:
@@ -190,10 +190,10 @@ interface FlowStep {
           <div class="flex flex-col gap-1">
             <span
               class="font-sans font-bold"
-              style="font-family: 'Public Sans', sans-serif; font-size: 2.25rem; color: var(--color-primary); letter-spacing: -0.03em; line-height: 1"
+              style="font-family: 'Public Sans', sans-serif; font-size: 3rem; color: var(--color-primary); letter-spacing: -0.03em; line-height: 1"
             >{{ stat.valor }}</span>
             <span
-              class="font-inter text-sm"
+              class="font-inter text-base"
               style="color: var(--color-secondary)"
             >{{ stat.label }}</span>
           </div>
@@ -208,11 +208,11 @@ interface FlowStep {
 
         <!-- Encabezado -->
         <div class="mb-16">
-          <p class="text-[var(--color-primary)] font-inter text-sm font-medium tracking-widest uppercase mb-3">
+          <p class="text-[var(--color-primary)] font-inter text-base font-medium tracking-widest uppercase mb-3">
             Línea de tiempo
           </p>
           <h2
-            style="font-family: 'Public Sans', sans-serif; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-on-surface); letter-spacing: -0.02em; max-width: 22ch; line-height: 1.15"
+            style="font-family: 'Public Sans', sans-serif; font-size: clamp(2.25rem, 3.5vw, 3rem); font-weight: 700; color: var(--color-on-surface); letter-spacing: -0.02em; max-width: 22ch; line-height: 1.15"
           >
             Avances año a año
           </h2>
@@ -236,7 +236,7 @@ interface FlowStep {
               <button
                 type="button"
                 (click)="selectedYear.set(avance.year)"
-                class="relative z-10 w-14 h-14 rounded-full font-inter text-xs font-bold border-2 transition-all duration-300 cursor-pointer"
+                class="relative z-10 w-16 h-16 rounded-full font-inter text-sm font-bold border-2 transition-all duration-300 cursor-pointer"
                 [style.background]="selectedYear() === avance.year ? 'var(--color-primary)' : 'var(--color-surface)'"
                 [style.color]="selectedYear() === avance.year ? 'white' : 'var(--color-on-surface-variant)'"
                 [style.borderColor]="selectedYear() === avance.year ? 'var(--color-primary)' : 'var(--color-surface-container)'"
@@ -245,7 +245,7 @@ interface FlowStep {
 
               <!-- Etiqueta del año -->
               <p
-                class="mt-3 font-inter text-xs text-center px-2 leading-snug transition-colors duration-300"
+                class="mt-3 font-inter text-sm text-center px-2 leading-snug transition-colors duration-300"
                 style="max-width: 12ch"
                 [style.color]="selectedYear() === avance.year ? 'var(--color-primary)' : 'var(--color-secondary)'"
                 [style.fontWeight]="selectedYear() === avance.year ? '600' : '400'"
@@ -262,15 +262,15 @@ interface FlowStep {
           style="background: var(--color-surface)"
         >
           <p
-            class="font-inter text-base leading-relaxed mb-8"
+            class="font-inter text-lg leading-relaxed mb-8"
             style="color: var(--color-secondary); max-width: 72ch"
           >{{ selectedAvance().resumen }}</p>
 
-          <ul class="flex flex-col gap-4">
+          <ul class="flex flex-col gap-5">
             @for (hito of selectedAvance().hitos; track hito) {
               <li class="flex items-start gap-4">
                 <span
-                  class="shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
+                  class="shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5"
                   style="background: var(--color-primary-container)"
                 >
                   <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
@@ -278,7 +278,7 @@ interface FlowStep {
                   </svg>
                 </span>
                 <span
-                  class="font-inter text-sm leading-relaxed"
+                  class="font-inter text-base leading-relaxed"
                   style="color: var(--color-on-surface)"
                 >{{ hito }}</span>
               </li>

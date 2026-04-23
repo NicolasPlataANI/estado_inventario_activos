@@ -85,11 +85,6 @@ const COLORES = {
                 </ul>
               </div>
 
-              <p>
-                El incumplimiento o la entrega parcial de esta información genera retrasos en
-                los procesos de revisión técnica, impide la toma de decisiones basada en datos
-                y dificulta el seguimiento al estado de conservación de la red.
-              </p>
             </div>
           </div>
 

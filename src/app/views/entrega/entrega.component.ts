@@ -17,15 +17,15 @@ interface Escenario {
     <!-- ── ENCABEZADO ─────────────────────────────────────────── -->
     <section class="bg-[var(--color-surface)] pt-20 pb-12 px-6 lg:px-10">
       <div class="max-w-7xl mx-auto">
-        <p class="text-[var(--color-primary)] font-inter text-sm font-medium tracking-widest uppercase mb-3">
+        <p class="text-[var(--color-primary)] font-inter text-base font-medium tracking-widest uppercase mb-3">
           Gestión de Información
         </p>
         <h1
-          style="font-family:'Public Sans',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--color-on-surface);letter-spacing:-0.02em;max-width:22ch;line-height:1.15"
+          style="font-family:'Public Sans',sans-serif;font-size:clamp(2.5rem,4.5vw,3.75rem);font-weight:700;color:var(--color-on-surface);letter-spacing:-0.02em;max-width:22ch;line-height:1.15"
         >
           Entrega de Información por Concesionarios
         </h1>
-        <p class="mt-4 text-base leading-relaxed"
+        <p class="mt-4 text-lg leading-relaxed"
           style="color:var(--color-secondary);font-family:'Inter',sans-serif;max-width:60ch">
           Dos escenarios que contrastan la entrega problemática frente a la entrega estructurada.
           Haz clic en cada mazo y navega con las flechas.
@@ -46,7 +46,7 @@ interface Escenario {
                   ? 'background:rgba(78,96,115,0.12);color:#4e6073'
                   : 'background:rgba(160,65,0,0.12);color:#a04100'"
               >{{ $index + 1 }}</span>
-              <span class="text-xs font-semibold tracking-widest uppercase"
+              <span class="text-sm font-semibold tracking-widest uppercase"
                 [style.color]="esc.tipo==='problema' ? '#4e6073' : '#a04100'">
                 Escenario {{ $index + 1 }}
               </span>
@@ -68,33 +68,33 @@ interface Escenario {
     <section class="bg-[var(--color-surface)] py-20 px-6 lg:px-10">
       <div class="max-w-7xl mx-auto">
         <h2 class="mb-10"
-          style="font-family:'Public Sans',sans-serif;font-size:1.5rem;font-weight:700;color:var(--color-on-surface);letter-spacing:-0.02em">
+          style="font-family:'Public Sans',sans-serif;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;color:var(--color-on-surface);letter-spacing:-0.02em">
           Impacto en tiempos de ciclo
         </h2>
         <div class="grid md:grid-cols-2 gap-6">
           <div class="rounded-2xl p-8" style="background:rgba(78,96,115,0.06)">
-            <p class="text-xs font-semibold uppercase tracking-widest mb-5" style="color:#4e6073">⚠ Entrega dispersa</p>
-            <div class="space-y-4">
+            <p class="text-sm font-semibold uppercase tracking-widest mb-5" style="color:#4e6073">⚠ Entrega dispersa</p>
+            <div class="space-y-5">
               @for (item of impactoProblema; track item.label) {
                 <div class="flex items-start gap-4">
-                  <span class="text-2xl shrink-0">{{ item.icono }}</span>
+                  <span class="text-3xl shrink-0">{{ item.icono }}</span>
                   <div>
-                    <p class="text-sm font-semibold" style="color:var(--color-on-surface);font-family:'Public Sans',sans-serif">{{ item.label }}</p>
-                    <p class="text-sm mt-0.5" style="color:var(--color-secondary);font-family:'Inter',sans-serif">{{ item.valor }}</p>
+                    <p class="text-base font-semibold" style="color:var(--color-on-surface);font-family:'Public Sans',sans-serif">{{ item.label }}</p>
+                    <p class="text-base mt-0.5" style="color:var(--color-secondary);font-family:'Inter',sans-serif">{{ item.valor }}</p>
                   </div>
                 </div>
               }
             </div>
           </div>
           <div class="rounded-2xl p-8" style="background:rgba(160,65,0,0.06)">
-            <p class="text-xs font-semibold uppercase tracking-widest mb-5" style="color:#a04100">✓ Entrega estructurada</p>
-            <div class="space-y-4">
+            <p class="text-sm font-semibold uppercase tracking-widest mb-5" style="color:#a04100">✓ Entrega estructurada</p>
+            <div class="space-y-5">
               @for (item of impactoIdeal; track item.label) {
                 <div class="flex items-start gap-4">
-                  <span class="text-2xl shrink-0">{{ item.icono }}</span>
+                  <span class="text-3xl shrink-0">{{ item.icono }}</span>
                   <div>
-                    <p class="text-sm font-semibold" style="color:var(--color-on-surface);font-family:'Public Sans',sans-serif">{{ item.label }}</p>
-                    <p class="text-sm mt-0.5" style="color:var(--color-secondary);font-family:'Inter',sans-serif">{{ item.valor }}</p>
+                    <p class="text-base font-semibold" style="color:var(--color-on-surface);font-family:'Public Sans',sans-serif">{{ item.label }}</p>
+                    <p class="text-base mt-0.5" style="color:var(--color-secondary);font-family:'Inter',sans-serif">{{ item.valor }}</p>
                   </div>
                 </div>
               }
