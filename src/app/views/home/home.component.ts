@@ -87,6 +87,49 @@ interface FlowStep {
       </div>
     </section>
 
+    <!-- ── IMPORTANCIA ESTRATÉGICA ──────────────────────────────── -->
+    <section class="bg-[var(--color-surface)] py-24 px-6 lg:px-10">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-16 items-center">
+
+        <!-- Columna izquierda: encabezado -->
+        <div>
+          <p class="text-[var(--color-primary)] font-inter text-base font-medium tracking-widest uppercase mb-4">
+            Importancia estratégica
+          </p>
+          <h2
+            style="font-family: 'Public Sans', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--color-on-surface); letter-spacing: -0.02em; line-height: 1.15; max-width: 18ch"
+          >
+            Un inventario que transforma la gestión vial del país
+          </h2>
+          <p class="mt-6 text-lg leading-relaxed" style="color: var(--color-secondary); font-family: 'Inter', sans-serif; max-width: 44ch">
+            La georreferenciación de activos no es solo un requisito técnico —
+            es la base de decisiones estratégicas que impactan la infraestructura nacional.
+          </p>
+        </div>
+
+        <!-- Columna derecha: lista de objetivos -->
+        <ul class="flex flex-col gap-5">
+          @for (item of importanciaItems; track item.titulo) {
+            <li class="flex items-start gap-4">
+              <span
+                class="shrink-0 w-8 h-8 rounded-xl flex items-center justify-center text-base"
+                style="background: var(--color-primary-container)"
+              >{{ item.icono }}</span>
+              <div>
+                <p class="font-semibold text-base leading-snug" style="font-family: 'Public Sans', sans-serif; color: var(--color-on-surface)">
+                  {{ item.titulo }}
+                </p>
+                <p class="text-sm mt-0.5 leading-relaxed" style="color: var(--color-secondary); font-family: 'Inter', sans-serif">
+                  {{ item.descripcion }}
+                </p>
+              </div>
+            </li>
+          }
+        </ul>
+
+      </div>
+    </section>
+
     <!-- ── DIAGRAMA DE FLUJO ANI ──────────────────────────────────── -->
     <section class="bg-[var(--color-surface-low)] py-24 px-6 lg:px-10 overflow-hidden">
 
@@ -296,6 +339,15 @@ export class HomeComponent {
   constructor() {
     this.titleSvc.setTitle('Inventario de Activos — ANI');
   }
+
+  protected readonly importanciaItems = [
+    { icono: '🗺️', titulo: 'Consolidar el inventario nacional vial',        descripcion: 'Tener un registro completo, actualizado y georreferenciado de todos los activos de la red concesionada.' },
+    { icono: '⚙️',  titulo: 'Mejorar la gestión de activos públicos',         descripcion: 'Optimizar el mantenimiento, la supervisión y el ciclo de vida de la infraestructura vial del país.' },
+    { icono: '📊', titulo: 'Facilitar valoración contable y depreciación',    descripcion: 'Contar con información espacial precisa para los procesos de valoración y reconocimiento contable de los activos.' },
+    { icono: '📐', titulo: 'Fortalecer planeación e inversiones',             descripcion: 'Basar la priorización de proyectos y la asignación de recursos en datos reales y verificables.' },
+    { icono: '🔗', titulo: 'Mejorar interoperabilidad entre entidades',       descripcion: 'Estandarizar la información para compartirla con INVIAS, Min. Transporte, DNP y otras entidades del Estado.' },
+    { icono: '🏛️', titulo: 'Soportar decisiones técnicas y financieras',      descripcion: 'Proveer al Estado la evidencia geoespacial necesaria para decisiones de alto impacto en infraestructura.' },
+  ];
 
   protected readonly flowSteps: FlowStep[] = [
     {
