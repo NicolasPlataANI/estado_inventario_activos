@@ -220,7 +220,7 @@ const COLOR_ESTADO: Record<string, string> = {
 
                   <!-- Proyecto (sticky) -->
                   <td
-                    class="px-5 py-3 z-10 group-hover:bg-[rgba(160,65,0,0.04)]"
+                    class="px-5 py-3 z-10"
                     [style]="tdStickyStyle(0, even)"
                   >
                     <span
@@ -231,7 +231,7 @@ const COLOR_ESTADO: Record<string, string> = {
 
                   <!-- Responsable (sticky) -->
                   <td
-                    class="px-4 py-3 z-10 group-hover:bg-[rgba(160,65,0,0.04)]"
+                    class="px-4 py-3 z-10"
                     [style]="tdStickyStyle(1, even)"
                   >
                     <span
@@ -330,8 +330,12 @@ const COLOR_ESTADO: Record<string, string> = {
   styles: [`
     :host { display: block; }
 
-    /* Hover en fila */
-    tr:hover td { background-color: rgba(160, 65, 0, 0.04) !important; }
+    /* Hover en fila — se usa background-image para que se apile SOBRE el background-color
+       sin reemplazarlo. Esto garantiza que las celdas sticky (que tienen fondo sólido via
+       inline style) sigan siendo opacas y no dejen ver los chips desplazados detrás. */
+    tr:hover td {
+      background-image: linear-gradient(rgba(160,65,0,0.06), rgba(160,65,0,0.06)) !important;
+    }
 
     /* Borde fantasma en focus de fila */
     tr:focus-visible { outline: 1px solid rgba(31,27,22,0.15); outline-offset: -1px; }
