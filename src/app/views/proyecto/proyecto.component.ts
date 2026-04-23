@@ -188,53 +188,6 @@ const CHIP_BG: Record<EstadoElemento, string> = {
               </div>
             </div>
 
-            <!-- Caja de Observaciones (editable) -->
-            <div
-              class="rounded-2xl overflow-hidden"
-              style="background: white; box-shadow: 0 32px 48px rgba(31,27,22,0.06)"
-            >
-              <div class="px-5 pt-5 pb-2">
-                <label
-                  for="obs-textarea"
-                  class="block text-xs font-semibold uppercase tracking-widest mb-3"
-                  style="color: var(--color-primary); font-family: 'Inter', sans-serif"
-                >Observaciones técnicas</label>
-                <textarea
-                  id="obs-textarea"
-                  class="w-full resize-none text-sm leading-relaxed outline-none"
-                  style="
-                    min-height: 120px;
-                    background: transparent;
-                    color: var(--color-on-surface);
-                    font-family: 'Inter', sans-serif;
-                    border: none;
-                    border-bottom: 2px solid rgba(31,27,22,0.12);
-                    border-radius: 0;
-                    padding-bottom: 8px;
-                    transition: border-color 0.2s ease;
-                  "
-                  [value]="observaciones()"
-                  (input)="onObsChange($event)"
-                  (focus)="onObsFocus($event)"
-                  (blur)="onObsBlur($event)"
-                  [placeholder]="p.observaciones ? '' : 'Agregar observación técnica…'"
-                ></textarea>
-              </div>
-              <div
-                class="px-5 py-3 flex items-center justify-between"
-                style="background: var(--color-surface-low)"
-              >
-                <span class="text-xs" style="color: var(--color-secondary); font-family: 'Inter', sans-serif">
-                  {{ observaciones().length }} caracteres
-                </span>
-                @if (obsModificada()) {
-                  <span class="text-xs font-medium" style="color: var(--color-primary); font-family: 'Inter', sans-serif">
-                    ● Sin guardar
-                  </span>
-                }
-              </div>
-            </div>
-
             <!-- CTA Dashboard Geodata -->
             <a
               [routerLink]="['/geodata', p.id]"
@@ -296,27 +249,6 @@ export class ProyectoComponent {
   protected readonly cargando = computed(
     () => !this.proyectos() && this.id() !== '',
   );
-
-  // ── Observaciones (editable en UI, no persiste en esta versión) ──
-  private readonly _observaciones = signal('');
-  protected readonly obsModificada = signal(false);
-
-  protected readonly observaciones = computed(
-    () => this._observaciones() || this.proyecto()?.observaciones || '',
-  );
-
-  protected onObsChange(e: Event): void {
-    this._observaciones.set((e.target as HTMLTextAreaElement).value);
-    this.obsModificada.set(true);
-  }
-
-  protected onObsFocus(e: Event): void {
-    (e.target as HTMLTextAreaElement).style.borderBottomColor = '#a04100';
-  }
-
-  protected onObsBlur(e: Event): void {
-    (e.target as HTMLTextAreaElement).style.borderBottomColor = 'rgba(31,27,22,0.12)';
-  }
 
   // ── Resumen del proyecto ─────────────────────────────────────────
   protected readonly resumenProyecto = computed(() =>
