@@ -332,7 +332,7 @@ export class HomeComponent {
 
   protected readonly stats: { valor: string; label: string }[] = [
     { valor: '41', label: 'Proyectos concesionados' },
-    { valor: '19', label: 'Tipos de activo vial' },
+    { valor: '17', label: 'Tipos de activo vial' },
     { valor: '5', label: 'Responsables ANI' },
     { valor: '779', label: 'Elementos trazados' },
   ];
